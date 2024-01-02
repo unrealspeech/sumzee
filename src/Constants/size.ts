@@ -1,0 +1,5 @@
+const PADDING = 15;
+const MARGIN = 15;
+const BORDER_RADIUS = 20;
+
+export { PADDING, MARGIN, BORDER_RADIUS };
