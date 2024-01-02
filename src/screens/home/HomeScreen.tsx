@@ -5,17 +5,26 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
 import { Alert } from "react-native";
-import { SafeView, Text } from "../../components";
+import { ActionModal, SafeView, Text } from "../../components";
 import { Ionicons } from "@expo/vector-icons";
 import { BORDER_RADIUS, MARGIN, PADDING, WIDTH } from "../../Constants";
 import { colors } from "../../theme";
 import { files } from "../../mock";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(true);
+    console.log("Triggered");
+  };
+  const close = () => {
+    setIsOpen(false);
+  };
   const handleDocumentPick = async () => {
     try {
       console.log("Started.....");
@@ -23,6 +32,7 @@ const HomeScreen = () => {
         type: "*/*",
       });
       if (result) {
+        navigation.navigate("PlayBook", { uri: result });
         console.log("Selected file: ", result);
         uploadDocument(result);
       }
@@ -119,7 +129,7 @@ const HomeScreen = () => {
                     {item.dateAdded}
                   </Text>
                 </View>
-                <TouchableOpacity activeOpacity={0.8}>
+                <TouchableOpacity onPress={handleOpen} activeOpacity={0.8}>
                   <Ionicons
                     name="ellipsis-horizontal"
                     size={24}
@@ -138,6 +148,7 @@ const HomeScreen = () => {
       >
         <Ionicons name="add" size={35} color={"#FFFFFF"} />
       </TouchableOpacity>
+      <ActionModal isOpen={isOpen} onClose={close} />
     </View>
   );
 };

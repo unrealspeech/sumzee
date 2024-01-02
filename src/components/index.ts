@@ -5,6 +5,7 @@ import { EmptyBox } from "./EmptyBox";
 import SafeView from "./SafeView";
 import TextField from "./TextField";
 import { Text } from "./Typography";
+import { ActionModal } from "./modal";
 export {
   Text,
   Button,
@@ -14,4 +15,5 @@ export {
   TextField,
   BottomNavigation,
   EmptyBox,
+  ActionModal,
 };

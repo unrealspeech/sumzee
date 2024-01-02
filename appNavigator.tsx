@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen, SignInScreen } from "./src/screens";
+import { HomeScreen, PlayBookScreen, SignInScreen } from "./src/screens";
 import { hideHeader } from "./src/custom";
 
 const AuthStacks = createNativeStackNavigator();
@@ -15,7 +15,7 @@ const RootStacks = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <RootStacks.Navigator>
-      <RootStacks.Screen
+      {/* <RootStacks.Screen
         options={hideHeader}
         name="Auth"
         component={AuthStack}
@@ -23,6 +23,11 @@ const AppNavigator = () => {
       <RootStacks.Screen
         name="Home"
         component={HomeScreen}
+        options={hideHeader}
+      /> */}
+      <RootStacks.Screen
+        name="PlayBook"
+        component={PlayBookScreen}
         options={hideHeader}
       />
     </RootStacks.Navigator>
