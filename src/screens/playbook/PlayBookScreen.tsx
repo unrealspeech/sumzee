@@ -12,7 +12,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { clamp } from "react-native-redash";
 
-export default function PlayBookScreen() {
+export default function PlayBookScreen({ navigation }: any) {
   const [isOpen, setIsOpen] = React.useState(false);
   const SLIDER_WIDTH = 15;
   const translateX = useSharedValue(0);
@@ -49,9 +49,13 @@ export default function PlayBookScreen() {
       <VoicesModal setIsOpen={setIsOpen} isOpen={isOpen} />
 
       <SafeView>
-        <View style={styles.appBar}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("Home")}
+          style={styles.appBar}
+        >
           <Ionicons name="ios-arrow-back" size={24} color={"#FFFFFF"} />
-        </View>
+        </TouchableOpacity>
         <View style={styles.mainContent}>
           <ScrollView
             contentContainerStyle={{

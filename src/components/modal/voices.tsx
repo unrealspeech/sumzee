@@ -26,6 +26,8 @@ interface VoiceModalProps {
 }
 
 const VoicesModal = ({ isOpen, setIsOpen }: VoiceModalProps) => {
+  const [selectedItem, setSelectedItem] = React.useState<any>(null);
+
   const opacity = useSharedValue(1);
   const translateY = useSharedValue(0);
   const closedObserver = useSharedValue(false);
@@ -102,7 +104,14 @@ const VoicesModal = ({ isOpen, setIsOpen }: VoiceModalProps) => {
             horizontal={false}
             keyExtractor={(item) => item.voiceId}
             renderItem={({ item }) => (
-              <View style={styles.voiceContainer}>
+              <TouchableOpacity
+                style={styles.voiceContainer}
+                onPress={() =>
+                  setSelectedItem(
+                    item.voiceId === selectedItem ? "" : item.voiceId
+                  )
+                }
+              >
                 <View style={styles.block1}>
                   <View style={styles.imageWrapper}>
                     <Image
@@ -113,10 +122,7 @@ const VoicesModal = ({ isOpen, setIsOpen }: VoiceModalProps) => {
                   <View style={styles.voiceBody}>
                     <Text
                       variant="sub-heading4"
-                      sx={{
-                        fontFamily: "hBold",
-                        marginBottom: 5,
-                      }}
+                      sx={{ fontFamily: "hBold", marginBottom: 5 }}
                       color={"#FFF"}
                     >
                       {item.name}
@@ -126,10 +132,13 @@ const VoicesModal = ({ isOpen, setIsOpen }: VoiceModalProps) => {
                     </Text>
                   </View>
                 </View>
-                <View style={styles.checkOverlay}>
-                  <Ionicons name="checkmark" size={20} color={"#000000"} />
-                </View>
-              </View>
+                {selectedItem === item.voiceId ||
+                (item.name === "Scarlett" && !selectedItem) ? (
+                  <View style={styles.checkOverlay}>
+                    <Ionicons name="checkmark" size={20} color={"#000000"} />
+                  </View>
+                ) : null}
+              </TouchableOpacity>
             )}
           />
         </View>

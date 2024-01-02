@@ -15,7 +15,7 @@ const RootStacks = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <RootStacks.Navigator>
-      {/* <RootStacks.Screen
+      <RootStacks.Screen
         options={hideHeader}
         name="Auth"
         component={AuthStack}
@@ -24,7 +24,7 @@ const AppNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={hideHeader}
-      /> */}
+      />
       <RootStacks.Screen
         name="PlayBook"
         component={PlayBookScreen}
