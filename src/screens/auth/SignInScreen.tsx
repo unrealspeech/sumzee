@@ -15,7 +15,7 @@ export default function SignInScreen() {
           <View />
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Text color={"#fff"} variant="display">
-              Ronnie AI
+              Sumzee
             </Text>
             <Text
               variant="headline"
