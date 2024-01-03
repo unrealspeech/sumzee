@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { SafeView, Text, VoicesModal } from "../../components";
+import { SafeView, SpeedModal, Text, VoicesModal } from "../../components";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { BORDER_RADIUS, HEIGHT, WIDTH } from "../../Constants";
 import { colors } from "../../theme";
@@ -14,6 +14,7 @@ import { clamp } from "react-native-redash";
 
 export default function PlayBookScreen({ navigation }: any) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isSpeedModalOpen, setIsSpeedModalOpen] = React.useState(false);
   const SLIDER_WIDTH = 15;
   const translateX = useSharedValue(0);
 
@@ -47,7 +48,7 @@ export default function PlayBookScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <VoicesModal setIsOpen={setIsOpen} isOpen={isOpen} />
-
+      <SpeedModal setIsOpen={setIsSpeedModalOpen} isOpen={isSpeedModalOpen} />
       <SafeView>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -102,6 +103,7 @@ export default function PlayBookScreen({ navigation }: any) {
                 <TouchableOpacity
                   activeOpacity={0.8}
                   style={styles.iconOverlay}
+                  onPress={() => setIsSpeedModalOpen(true)}
                 >
                   <Text
                     color="#ffffff"

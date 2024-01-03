@@ -5,7 +5,7 @@ import { EmptyBox } from "./EmptyBox";
 import SafeView from "./SafeView";
 import TextField from "./TextField";
 import { Text } from "./Typography";
-import { ActionModal, VoicesModal } from "./modal";
+import { ActionModal, SpeedModal, VoicesModal } from "./modal";
 export {
   Text,
   Button,
@@ -17,4 +17,5 @@ export {
   EmptyBox,
   ActionModal,
   VoicesModal,
+  SpeedModal,
 };

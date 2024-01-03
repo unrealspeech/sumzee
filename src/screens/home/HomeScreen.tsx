@@ -77,7 +77,9 @@ const HomeScreen = ({ navigation }: any) => {
             <View style={styles.proBtn}>
               <Text sx={styles.proBtnText}>Go Pro</Text>
             </View>
-            <Ionicons name="settings" size={24} color="white" />
+            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+              <Ionicons name="settings" size={24} color="white" />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.searchBar}>

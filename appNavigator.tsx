@@ -1,5 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen, PlayBookScreen, SignInScreen } from "./src/screens";
+import {
+  HomeScreen,
+  PlayBookScreen,
+  SettingsScreen,
+  SignInScreen,
+} from "./src/screens";
 import { hideHeader } from "./src/custom";
 
 const AuthStacks = createNativeStackNavigator();
@@ -28,6 +33,11 @@ const AppNavigator = () => {
       <RootStacks.Screen
         name="PlayBook"
         component={PlayBookScreen}
+        options={hideHeader}
+      />
+      <RootStacks.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={hideHeader}
       />
     </RootStacks.Navigator>

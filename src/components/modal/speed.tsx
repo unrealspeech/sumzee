@@ -10,7 +10,6 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { HEIGHT, WIDTH } from "../../Constants";
 import { Text } from "../Typography";
-import { voices } from "../../mock";
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
@@ -20,19 +19,18 @@ import Animated, {
 } from "react-native-reanimated";
 import { clamp } from "react-native-redash";
 
-interface VoiceModalProps {
+interface SpeedModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const VoicesModal = ({ isOpen, setIsOpen }: VoiceModalProps) => {
-  const [selectedItem, setSelectedItem] = React.useState<any>(null);
-
+const SpeedModal = ({ isOpen, setIsOpen }: SpeedModalProps) => {
   const opacity = useSharedValue(0);
   const translateY = useSharedValue(0);
   const closedObserver = useSharedValue(false);
   const display = useSharedValue(0);
-  const MODAL_HEIGHT = HEIGHT - 40;
+  const MODAL_HEIGHT = HEIGHT / 3;
+
   const animatedStyles = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
@@ -99,67 +97,42 @@ const VoicesModal = ({ isOpen, setIsOpen }: VoiceModalProps) => {
 
   // renders
   return (
-    <PanGestureHandler onGestureEvent={gestureHandler}>
-      <Animated.View style={[styles.container, animatedStyles]}>
-        <TouchableOpacity onPress={closeModal} style={styles.iconOverlay}>
-          <Ionicons name="chevron-down" size={24} color={"#FFFFFF"} />
-        </TouchableOpacity>
-        <View style={styles.contentContainer}>
-          <Text variant="display" sx={{ marginBottom: 15 }} color={"#FFF"}>
-            Voices
-          </Text>
-          <FlatList
-            scrollEnabled={false}
-            data={voices}
-            horizontal={false}
-            keyExtractor={(item) => item.voiceId}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.voiceContainer}
-                onPress={() =>
-                  setSelectedItem(
-                    item.voiceId === selectedItem ? "" : item.voiceId
-                  )
-                }
-              >
-                <View style={styles.block1}>
-                  <View style={styles.imageWrapper}>
-                    <Image
-                      style={styles.image}
-                      source={{ uri: item.imageUri }}
-                    />
-                  </View>
-                  <View style={styles.voiceBody}>
-                    <Text
-                      variant="sub-heading4"
-                      sx={{ fontFamily: "hBold", marginBottom: 5 }}
-                      color={"#FFF"}
-                    >
-                      {item.name}
-                    </Text>
-                    <Text variant="pm" color={"#FFFFFF80"}>
-                      {item.country}
-                    </Text>
-                  </View>
-                </View>
-                {selectedItem === item.voiceId ||
-                (item.name === "Scarlett" && !selectedItem) ? (
-                  <View style={styles.checkOverlay}>
-                    <Ionicons name="checkmark" size={20} color={"#000000"} />
-                  </View>
-                ) : null}
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      </Animated.View>
-    </PanGestureHandler>
+    <Animated.View style={[styles.modalContainer, animatedStyles]}>
+      <TouchableOpacity
+        onPress={closeModal}
+        style={styles.backdrop}
+      ></TouchableOpacity>
+
+      <PanGestureHandler onGestureEvent={gestureHandler}>
+        <Animated.View style={[styles.container, animatedStyles]}>
+          <TouchableOpacity
+            onPress={closeModal}
+            style={styles.straightLine}
+          ></TouchableOpacity>
+          <View style={styles.contentContainer}></View>
+        </Animated.View>
+      </PanGestureHandler>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
+  modalContainer: {
+    position: "absolute",
+    width: WIDTH,
+    height: HEIGHT,
+    bottom: 0,
+    zIndex: 100,
+    justifyContent: "flex-end",
+  },
+  backdrop: {
+    position: "absolute",
+    width: WIDTH,
+    height: HEIGHT,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
   container: {
-    flex: 1,
+    // flex: 1,
     padding: 24,
     backgroundColor: "#1F1E1D",
     position: "absolute",
@@ -167,7 +140,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    zIndex: 1000,
+    zIndex: 100,
   },
   contentContainer: {
     flex: 1,
@@ -215,6 +188,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     marginRight: 10,
   },
+  straightLine: {
+    width: 50,
+    height: 5,
+    borderRadius: 5,
+    backgroundColor: "#ffffff",
+    alignSelf: "center",
+    marginBottom: 10,
+  },
 });
 
-export default VoicesModal;
+export default SpeedModal;
